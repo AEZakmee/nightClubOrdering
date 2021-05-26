@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct MenuItem{
+struct MenuItem {
 	int id;
 	char name[20];
 	float price;

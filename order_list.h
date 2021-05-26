@@ -5,12 +5,12 @@
 #include <stdlib.h>
 
 struct ListNode {
-    struct MenuItem* tableOrder;
-    int number;
-    int table;
-    int key;
-    float total;
-    struct ListNode* next;
+	struct MenuItem* tableOrder;
+	int number;
+	int table;
+	int key;
+	float total;
+	struct ListNode* next;
 };
 
 struct ListNode* deleteFirst();
