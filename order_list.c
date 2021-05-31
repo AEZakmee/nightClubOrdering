@@ -20,6 +20,7 @@ void freeList() {
 	while (!isEmpty()) {
 		struct ListNode *temp = deleteFirst();
 		printf("Order of table %d, was not completed, deleting data\n", temp->table);
+		free(temp->tableOrder);
 		free(temp);
 	}
 }
@@ -30,8 +31,9 @@ void addNewOrder(int table, int number, struct MenuItem *arr) {
 
 void insertFirst(int table, int number, struct MenuItem *arr) {
 	//create a link
-	struct ListNode *link = (struct ListNode*) malloc(sizeof(struct ListNode));
-	link->tableOrder = (struct MenuItem*) malloc(sizeof(struct MenuItem) * number);
+	// Valgrind complained about using malloc, so i changed it to calloc
+	struct ListNode *link = (struct ListNode*) calloc(1, sizeof(struct ListNode));
+	link->tableOrder = (struct MenuItem*) calloc(number, sizeof(struct MenuItem));
 	link->table = table;
 	link->number = number;
 	for (int i = 0; i < number ; i++) {
@@ -50,7 +52,7 @@ void addLast(int table, int number, struct MenuItem *arr)
 {
 	//create a new node
 	struct ListNode *newNode = (struct ListNode*) malloc(sizeof(struct ListNode));
-	newNode->tableOrder = (struct MenuItem*) malloc(sizeof(struct MenuItem) * number);
+	newNode->tableOrder =  (struct MenuItem*) calloc(number, sizeof(struct MenuItem)); 
 	newNode->table = table;
 	newNode->number = number;
 	newNode->next = NULL;
@@ -104,6 +106,7 @@ void completeOrder(int key, char* file, float *totalSales) {
 	struct ListNode *temp = delete(key);
 	*totalSales += temp->total;
 	saveOrderToFile(file, temp->tableOrder, temp->number);
+	free(temp->tableOrder);
 	free(temp);
 }
 

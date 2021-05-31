@@ -86,6 +86,7 @@ int main(int argc, char** argv) {
 		err("Error getting information\n");
 	}
 	printf("\n%s", ans);
+	free(items);
 	close(clientSocket);
 	return 0;
 }

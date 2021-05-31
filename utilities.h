@@ -3,10 +3,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#define PRODUCT_NAME_LENGTH 20
 
 struct MenuItem {
 	int id;
-	char name[20];
+	char name[PRODUCT_NAME_LENGTH];
 	float price;
 	int number;
 };
